@@ -19,6 +19,7 @@ import org.springframework.http.HttpStatus;
 
 import com.formation.spring.entities.Book;
 import com.formation.spring.exceptions.BookNotFoundException;
+import com.formation.spring.exceptions.NegativePriceException;
 import com.formation.spring.repositories.BookRepository;
 
 import jakarta.persistence.EntityManager;
@@ -40,8 +41,8 @@ public class BookController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Book> findOneBook(@PathVariable Long id) {
-        return bookRepository.findById(id);
+    public Book findOneBook(@PathVariable Long id) {
+        return bookRepository.findById(id).orElseThrow(BookNotFoundException::new);
     }
 
     @PostMapping
@@ -52,6 +53,9 @@ public class BookController {
 
     @PutMapping("/{id}")
     public Book updateBook(@PathVariable Long id, @RequestBody Book updatedBook) {
+        if (updatedBook.getPrice() < 0) {
+            throw new NegativePriceException();
+        }
         Book oldBook = bookRepository.findById(id).orElseThrow(BookNotFoundException::new);
         oldBook.setAuthor(updatedBook.getAuthor());
         oldBook.setName(updatedBook.getName());
