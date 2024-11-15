@@ -14,12 +14,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class SimpleController {
 
     private ArrayList<String> list = new ArrayList<String>();
+    private ArrayList<String> prenom = new ArrayList<String>();
     private int count = 4;
 
     public SimpleController() {
-        list.add("String1");
-        list.add("String2");
-        list.add("String3");
+        prenom.add("Nicolas");
+        prenom.add("Sheerin");
+        prenom.add("Valentin");
     }
 
     @GetMapping("/")
@@ -49,6 +50,17 @@ public class SimpleController {
     public ArrayList<String> delete(){
         list.remove(0);
         return list;
+    }
+
+    @GetMapping("/prenom")
+    public String getPrenom(){
+        return "Bonjour Clément";
+    }
+
+    @PostMapping("add-prenom")
+    public ArrayList<String> addPrenom(){
+        prenom.add("Clément");
+        return prenom;
     }
 
     
