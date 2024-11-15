@@ -19,7 +19,7 @@ public class Application {
 	@Bean
 	public CommandLineRunner demo(BookRepository repository){
 		return(args) -> {
-			repository.save(new Book("Livre 1", "Auteur 1"));	
+			repository.save(new Book("Livre 1", "Auteur 1", 10));	
 		};
 	}
 
