@@ -18,9 +18,11 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.http.HttpStatus;
 
 import com.formation.spring.entities.Book;
+import com.formation.spring.entities.BookDetails;
 import com.formation.spring.exceptions.BookNotFoundException;
 import com.formation.spring.exceptions.NegativePriceException;
 import com.formation.spring.repositories.BookRepository;
+import com.formation.spring.services.BookService;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -34,6 +36,9 @@ public class BookController {
 
     @PersistenceContext
     private EntityManager entityManager;
+
+    @Autowired
+    private BookService bookService;
 
     @GetMapping
     public Iterable<Book> findAll() {
@@ -132,4 +137,14 @@ public class BookController {
         return bookRepository.findAllByOrderByPriceAsc();
     }
 
+    @PutMapping("/{id}/details")
+    public Book updateBookDetails(Long id, BookDetails details){
+        return bookService.updateBookDetails(id, details);
+    }
+
+    @PostMapping("/details")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Book createWithDetails(@RequestBody Book book) {
+      return bookService.createBookWithDetails(book);
+    }
 }

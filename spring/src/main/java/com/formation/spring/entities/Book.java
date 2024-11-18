@@ -1,10 +1,13 @@
 package com.formation.spring.entities;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class Book {
@@ -21,6 +24,10 @@ public class Book {
 
     @Column(nullable = false)
     private Integer price;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "detail_id", referencedColumnName = "id", nullable = false)
+    private BookDetails bookDetails;
 
 
     public Book() {
@@ -58,6 +65,14 @@ public class Book {
 
     public void setPrice(Integer price) {
         this.price = price;
+    }
+
+    public BookDetails getDetails() {
+        return bookDetails;
+    }
+
+    public void setBookDetails(BookDetails details) {
+        this.bookDetails = details;
     }
 
 }
