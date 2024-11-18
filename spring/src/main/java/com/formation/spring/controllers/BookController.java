@@ -138,7 +138,7 @@ public class BookController {
     }
 
     @PutMapping("/{id}/details")
-    public Book updateBookDetails(Long id, BookDetails details){
+    public Book updateBookDetails(Long id,@RequestBody BookDetails details){
         return bookService.updateBookDetails(id, details);
     }
 
