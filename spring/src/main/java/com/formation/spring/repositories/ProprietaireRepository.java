@@ -14,4 +14,9 @@ public interface ProprietaireRepository extends JpaRepository<Proprietaire, Long
 
     @Query("SELECT DISTINCT p FROM Proprietaire p JOIN p.carte_grise v WHERE v.marque = :marque")
     List<Proprietaire> findProprietairesByCarteGriseMarque(@Param("marque") String marque);
+
+    @Query("SELECT p FROM Proprietaire p JOIN p.carte_grise c WHERE c.marque = :marque AND c.numero LIKE :numeroPrefix")
+    List<Proprietaire> findProprietairesByMarqueAndNumeroPrefix(@Param("marque") String marque,
+            @Param("numeroPrefix") String numeroPrefix);
+
 }
