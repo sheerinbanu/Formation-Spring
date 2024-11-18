@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 
+import com.formation.spring.entities.Review;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -139,6 +140,7 @@ public class BookController {
 
     @PutMapping("/{id}/details")
     public Book updateBookDetails(Long id, BookDetails details){
+
         return bookService.updateBookDetails(id, details);
     }
 
@@ -147,4 +149,17 @@ public class BookController {
     public Book createWithDetails(@RequestBody Book book) {
       return bookService.createBookWithDetails(book);
     }
+
+    @PostMapping("{bookId}/review")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Book createReview(@PathVariable Long bookId, @RequestBody Review review){
+        return bookService.addReviewToBook(bookId, review);
+    }
+
+    @DeleteMapping("{bookId}/review/{reviewId}")
+    @ResponseStatus(HttpStatus.OK)
+    public Book deleteReview(@PathVariable Long bookId, @PathVariable Long reviewId){
+        return bookService.removeReviewToBook(bookId,reviewId);
+    }
+
 }

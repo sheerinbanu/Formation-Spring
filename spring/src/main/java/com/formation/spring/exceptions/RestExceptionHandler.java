@@ -20,6 +20,10 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     protected ResponseEntity<Object> handleNegativePrice(Exception ex, WebRequest request) {
         return handleExceptionInternal(ex, "Negative price not allowed", new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
     }
-    
+
+    @ExceptionHandler({ReviewNotFoundException.class})
+    protected ResponseEntity<Object> handleReviewNotFound(Exception ex, WebRequest request) {
+        return handleExceptionInternal(ex, "review not found", new HttpHeaders(), HttpStatus.NOT_FOUND, request);
+    }
     
 }

@@ -1,11 +1,9 @@
 package com.formation.spring.repositories;
 
+import com.formation.spring.entities.Review;
 import org.springframework.data.jpa.repository.JpaRepository;
-
-import com.formation.spring.entities.BookDetails;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface BookDetailsRepository extends JpaRepository<BookDetails, Long>{
-    
+public interface ReviewRepository extends JpaRepository<Review, Long> {
 }
