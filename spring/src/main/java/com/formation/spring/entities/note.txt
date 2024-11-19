@@ -1,0 +1,11 @@
+@Entity@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")public class Parent {
+    @Id@GeneratedValue(strategy = GenerationType.IDENTITY)private Long id;
+
+    @OneToMany(mappedBy = "parent")private List<Child> children;
+}
+@Entity@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")public class Child {
+    @Id@GeneratedValue(strategy = GenerationType.IDENTITY)private Long id;
+
+    @ManyToOneprivate Parent parent;
+
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")

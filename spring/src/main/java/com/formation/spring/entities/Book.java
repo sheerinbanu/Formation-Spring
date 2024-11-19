@@ -2,9 +2,10 @@ package com.formation.spring.entities;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name="book")
@@ -31,6 +32,12 @@ public class Book {
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
     @Column(nullable = true)
     private List<Review> reviews = new ArrayList<>();
+
+    @ManyToMany
+    @JoinTable(name="book_library", joinColumns = @JoinColumn(name="book_id"),
+            inverseJoinColumns = @JoinColumn(name="library_id")
+    )
+    private Set<Library> libraries = new HashSet<>();
 
 
     public Book() {

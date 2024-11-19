@@ -1,9 +1,6 @@
 package com.formation.spring.controllers;
 
 import java.util.List;
-import java.util.Optional;
-
-
 import com.formation.spring.entities.Review;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.http.HttpStatus;
-
 import com.formation.spring.entities.Book;
 import com.formation.spring.entities.BookDetails;
 import com.formation.spring.exceptions.BookNotFoundException;
@@ -43,6 +39,7 @@ public class BookController {
 
     @GetMapping
     public Iterable<Book> findAll() {
+
         return bookRepository.findAll();
     }
 

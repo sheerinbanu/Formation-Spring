@@ -25,5 +25,15 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     protected ResponseEntity<Object> handleReviewNotFound(Exception ex, WebRequest request) {
         return handleExceptionInternal(ex, "review not found", new HttpHeaders(), HttpStatus.NOT_FOUND, request);
     }
+
+    @ExceptionHandler({ReviewNotFoundException.class})
+    protected ResponseEntity<Object> handleProductNotFound(Exception ex, WebRequest request) {
+        return handleExceptionInternal(ex, "Product not found", new HttpHeaders(), HttpStatus.NOT_FOUND, request);
+    }
+
+    @ExceptionHandler({ReviewNotFoundException.class})
+    protected ResponseEntity<Object> handleCartNotFound(Exception ex, WebRequest request) {
+        return handleExceptionInternal(ex, "Cart not found", new HttpHeaders(), HttpStatus.NOT_FOUND, request);
+    }
     
 }
